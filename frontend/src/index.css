@@ -66,3 +66,174 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  /* Ensure the app takes full height */
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  /* Custom scrollbar for the chat area */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+    border-radius: 20px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(75, 85, 99, 0.8);
+  }
+  
+  /* Ensure the model dropdown is visible on mobile */
+  .popover-content-width {
+    width: min(280px, calc(100vw - 40px)) !important;
+  }
+
+  /* Add these rules to the end of your file */
+  .markdown-content code:not([class*="language-"]) {
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 2px 4px;
+    border-radius: 3px;
+    font-family: monospace;
+  }
+
+  .markdown-content pre {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    overflow: auto;
+    margin: 8px 0;
+    position: relative;
+    margin: 1rem 0;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+
+  .markdown-content pre div {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(75, 85, 99, 0.5) transparent;
+  }
+
+  .markdown-content pre div::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+
+  .markdown-content pre div::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .markdown-content pre div::-webkit-scrollbar-thumb {
+    background-color: rgba(75, 85, 99, 0.5);
+    border-radius: 3px;
+  }
+
+  .markdown-content a {
+    color: #60a5fa;
+    text-decoration: underline;
+  }
+
+  .markdown-content blockquote {
+    border-left: 3px solid #60a5fa;
+    padding-left: 10px;
+    margin-left: 0;
+    color: #a0aec0;
+  }
+
+  .markdown-content table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .markdown-content th,
+  .markdown-content td {
+    border: 1px solid rgba(75, 85, 99, 0.5);
+    padding: 6px 8px;
+  }
+
+  .markdown-content th {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  /* Copy button animation */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+  }
+
+  .markdown-content .copied {
+    animation: fadeIn 0.2s ease-in-out, fadeOut 0.2s ease-in-out 1.5s;
+  }
+
+  /* Add these styles to your existing CSS file */
+  .markdown-content pre button {
+    transition: opacity 0.2s ease-in-out;
+  }
+
+  /* Add a subtle highlight effect when code is copied */
+  .markdown-content pre.copied {
+    box-shadow: 0 0 0 2px rgba(96, 165, 250, 0.3);
+  }
+
+  /* Reasoning toggle button styles */
+  .reasoning-toggle {
+    @apply flex items-center gap-1 text-xs text-gray-400 hover:text-blue-400 transition-colors;
+  }
+
+  /* Reasoning content styles */
+  .reasoning-content {
+    @apply mt-2 p-2 bg-gray-800/50 rounded-md text-gray-300 text-xs;
+    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  }
+
+  /* Animation for showing/hiding reasoning */
+  .reasoning-appear {
+    animation: fadeInSlideDown 0.3s ease-in-out;
+  }
+
+  .reasoning-disappear {
+    animation: fadeOutSlideUp 0.2s ease-in-out;
+  }
+
+  @keyframes fadeInSlideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: 0;
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1000px;
+    }
+  }
+
+  @keyframes fadeOutSlideUp {
+    from {
+      opacity: 1;
+      transform: translateY(0);
+      max-height: 1000px;
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-10px);
+      max-height: 0;
+    }
+  }
+}
